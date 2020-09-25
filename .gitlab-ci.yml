@@ -41,7 +41,8 @@ docker-build-6.14:
     - docker push "symbiote/node-6.14"
   only:
     changes:
-      - 6.14/**/*
+      - 6.14/Dockerfile
+      - 6.14/*
 
 docker-build-8.11:
   # Official docker image.
