@@ -47,8 +47,8 @@ docker-build-6.14:
     - docker push "$CI_REGISTRY_IMAGE:6.14" 
   only:
     changes:
-      - 6.14/Dockerfile
       - 6.14/*
+
 
 docker-build-8.11:
   # Official docker image.
@@ -60,11 +60,11 @@ docker-build-8.11:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - cd 8.11
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:8.11" .
+    - docker push "$CI_REGISTRY_IMAGE:8.11"
   only:
     changes:
-      - 8.11/**/*
+      - 8.11/*
 
 docker-build-10.6:
   # Official docker image.
@@ -75,9 +75,9 @@ docker-build-10.6:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - cd 8.11
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+    - cd 10.6
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:8.11" .
+    - docker push "$CI_REGISTRY_IMAGE:8.11"
   only:
     changes:
-      - 10.6/**/*
+      - 10.6/*
