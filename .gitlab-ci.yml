@@ -17,6 +17,7 @@ docker-build-master:
       - 8.11/*
       - 10.16/*
       - 12.10/*
+      - 12.18/*
 
 
 docker-build:
