@@ -37,7 +37,7 @@ docker-build-6.14:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - cd 6.14
-    - docker build --pull -t "symbiote/node-6.14"
+    - docker build --pull -t "symbiote/node-6.14" .
     - docker push "symbiote/node-6.14"
   only:
     changes:
