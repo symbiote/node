@@ -1,4 +1,4 @@
 #!/bin/sh
-# WIP for Only test
+# WIP for Image naming
 
 docker build -t symbiote/node:6.14 .
