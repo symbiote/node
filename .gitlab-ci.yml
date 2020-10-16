@@ -1,4 +1,4 @@
-docker-build-master:
+docker-node-latest:
   # Official docker image.
   image: docker:19.03.12
   stage: build
@@ -6,21 +6,15 @@ docker-build-master:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
+    - docker push symbiote/node:latest
   only:
     - master
-  except:
-    changes:
-      - 6.14/*
-      - 8.11/*
-      - 10.16/*
-      - 12.10/*
-      - 12.18/*
 
-
-docker-build:
+docker-node-6.14:
   # Official docker image.
   image: docker:19.03.12
   stage: build
@@ -28,30 +22,18 @@ docker-build:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
-  except:
-    - master
-
-docker-build-6.14:
-  # Official docker image.
-  image: docker:19.03.12
-  stage: build
-  services:
-    - docker:19.03.12-dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - cd 6.14
     - docker build --pull -t "$CI_REGISTRY_IMAGE:6.14" .
-    - docker push "$CI_REGISTRY_IMAGE:6.14" 
+    - docker push "$CI_REGISTRY_IMAGE:6.14"
+    - docker push symbiote/node:6.14 
   only:
     changes:
       - 6.14/*
 
 
-docker-build-8.11:
+docker-node-8.11:
   # Official docker image.
   image: docker:19.03.12
   stage: build
@@ -59,15 +41,17 @@ docker-build-8.11:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - cd 8.11
     - docker build --pull -t "$CI_REGISTRY_IMAGE:8.11" .
     - docker push "$CI_REGISTRY_IMAGE:8.11"
+    - docker push symbiote/node:8.11
   only:
     changes:
       - 8.11/*
 
-docker-build-10.16:
+docker-node-10.16:
   # Official docker image.
   image: docker:19.03.12
   stage: build
@@ -75,15 +59,17 @@ docker-build-10.16:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - cd 10.16
     - docker build --pull -t "$CI_REGISTRY_IMAGE:10.16" .
     - docker push "$CI_REGISTRY_IMAGE:10.16"
+    - docker push symbiote/node:10.16
   only:
     changes:
       - 10.16/*
 
-docker-build-12.10:
+docker-node-12.10:
   # Official docker image.
   image: docker:19.03.12
   stage: build
@@ -91,15 +77,17 @@ docker-build-12.10:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS} 
   script:
     - cd 12.10
     - docker build --pull -t "$CI_REGISTRY_IMAGE:12.10" .
     - docker push "$CI_REGISTRY_IMAGE:12.10"
+    - docker push symbiote/node:12.10
   only:
     changes:
       - 12.10/*
 
-docker-build-12.18:
+docker-node-12.18:
   # Official docker image.
   image: docker:19.03.12
   stage: build
@@ -107,10 +95,12 @@ docker-build-12.18:
     - docker:19.03.12-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
   script:
     - cd 12.18
     - docker build --pull -t "$CI_REGISTRY_IMAGE:12.18" .
     - docker push "$CI_REGISTRY_IMAGE:12.18"
+    - docker push symbiote/node:12.18
   only:
     changes:
       - 12.18/*
