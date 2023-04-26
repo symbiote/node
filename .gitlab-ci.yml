@@ -1,9 +1,9 @@
 docker-node-latest:
   # Official docker image.
-  image: docker:19.03.12
+  image: docker:23.0.4
   stage: build
   services:
-    - docker:19.03.12-dind
+    - docker:23.0.4-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
@@ -16,10 +16,10 @@ docker-node-latest:
 
 docker-node-10.16:
   # Official docker image.
-  image: docker:19.03.12
+  image: docker:23.0.4
   stage: build
   services:
-    - docker:19.03.12-dind
+    - docker:23.0.4-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
@@ -34,10 +34,10 @@ docker-node-10.16:
 
 docker-node-12.10:
   # Official docker image.
-  image: docker:19.03.12
+  image: docker:23.0.4
   stage: build
   services:
-    - docker:19.03.12-dind
+    - docker:23.0.4-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
@@ -52,10 +52,10 @@ docker-node-12.10:
 
 docker-node-12.18:
   # Official docker image.
-  image: docker:19.03.12
+  image: docker:23.0.4
   stage: build
   services:
-    - docker:19.03.12-dind
+    - docker:23.0.4-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
@@ -70,10 +70,10 @@ docker-node-12.18:
 
 docker-node-14.17:
   # Official docker image.
-  image: docker:19.03.12
+  image: docker:23.0.4
   stage: build
   services:
-    - docker:19.03.12-dind
+    - docker:23.0.4-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
@@ -88,10 +88,10 @@ docker-node-14.17:
 
 docker-node-16.8:
   # Official docker image.
-  image: docker:19.03.12
+  image: docker:23.0.4
   stage: build
   services:
-    - docker:19.03.12-dind
+    - docker:23.0.4-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
@@ -103,3 +103,22 @@ docker-node-16.8:
   only:
     changes:
       - 16.8/*
+
+
+docker-node-18.16:
+  # Official docker image.
+  image: docker:23.0.4
+  stage: build
+  services:
+    - docker:23.0.4-dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}
+  script:
+    - cd 18.16
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:18.16" -t symbiote/node:18.16 .
+    - docker push "$CI_REGISTRY_IMAGE:18.16"
+    - docker push symbiote/node:18.16
+  only:
+    changes:
+      - 18.16/*
