@@ -5,6 +5,6 @@ RUN npm install -g grunt-cli \
     && npm install -g bower \
     && npm install -g create-react-native-app \
     && npm install react-native-cli \
-    && npm install -g yarn
+    && yarn policies set-version
 
 CMD ["/bin/bash"]
